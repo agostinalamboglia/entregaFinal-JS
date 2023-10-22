@@ -31,17 +31,26 @@ function cargarProductos(productosElegidos){
     });
 }
 
-cargarProductos(productosArray); /*-   ERROR   -*/
-/* ___________________ */
+cargarProductos(productosArray);
 
 botonesAgregar = document.querySelectorAll(".producto-agregar");
 
-    
 botonesAgregar.forEach(boton =>{
     boton.addEventListener("click", (e) => agregarAlCarrito(e));
 });
-    
-const productosEnCarrito = [];
+
+
+let productosEnCarrito; 
+
+const productosEnCarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito")); //si hay algo en el LS, lo traigo y lo asigno a prods en carrito
+
+if (productosEnCarritoLS) {
+    productosEnCarrito = productosEnCarritoLS;
+    actualizarContadorCarrito();
+} else {
+    productosEnCarrito = []; // si no hay nada en el LS , es un array vacio
+}
+
 
 function agregarAlCarrito(e){ //agrego elementos al array de productos en carrito
     const idBoton = e.currentTarget.id;
