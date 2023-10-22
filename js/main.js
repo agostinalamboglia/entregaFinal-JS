@@ -12,12 +12,13 @@ const botonCategorias = document.querySelectorAll("#boton-categorias");
 let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const contadorCarrito = document.querySelector("#contadorCarrito");
 
-function cargarProductos(){ 
+function cargarProductos(productosElegidos){ 
+        /* contenedorProductos.innerHTML = "";  */
+
         //llamo array
-        productosArray.forEach(producto => {
-        /* console.log(producto.titulo);  */
+        /*-   ERROR   -*/productosElegidos.forEach(producto => {
         const div = document.createElement("div"); //div contenedor de c/producto
-        div.classList.add("producto"); // pongo class al div
+        div.classList = "producto"; // pongo class al div
         div.innerHTML= `
         <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
         <div class="producto-detalles">
@@ -25,17 +26,16 @@ function cargarProductos(){
             <p class="producto-precio">${producto.precio}</p>
             <button class="producto-agregar" id="${producto.id}">.   Agregar   .</button>
         </div>`; //al boton agregar le agrego ID del producto
-        /* console.log(div); */
-        /* console.log(contenedorProductos); */
+
         contenedorProductos.append(div);
     });
 }
 
-cargarProductos();
+cargarProductos(productosArray); /*-   ERROR   -*/
 /* ___________________ */
 
 botonesAgregar = document.querySelectorAll(".producto-agregar");
-/* console.log(botonesAgregar); */
+
     
 botonesAgregar.forEach(boton =>{
     boton.addEventListener("click", (e) => agregarAlCarrito(e));
@@ -51,7 +51,7 @@ function agregarAlCarrito(e){ //agrego elementos al array de productos en carrit
        const index = productosEnCarrito.findIndex(producto => producto.id == idBoton); //busco index del producto
         productosEnCarrito[index].cantidad++; //suma una cantidad cuando se repite producto
     } else{
-        productoAgregado.cantidad = 1;
+        productoAgregado.cantidad = 1; //agrego propiedad cantidad a los elementos del array
         productosEnCarrito.push(productoAgregado);
     }
 
