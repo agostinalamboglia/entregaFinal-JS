@@ -79,7 +79,7 @@ main .contenedorProductos{
     gap: 1rem;    
 }
 
-.producto-carrito{
+.carrito-producto{
     display: flex;
     justify-content: space-between;
     align-items: center;

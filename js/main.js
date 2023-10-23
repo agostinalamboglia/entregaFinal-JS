@@ -42,10 +42,13 @@ botonesAgregar.forEach(boton =>{
 
 let productosEnCarrito; 
 
-const productosEnCarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito")); //si hay algo en el LS, lo traigo y lo asigno a prods en carrito
+let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
+//const productosEnCarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"));
+
 
 if (productosEnCarritoLS) {
-    productosEnCarrito = productosEnCarritoLS;
+    //productosEnCarrito = productosEnCarritoLS;
+    productosEnCarrito = JSON.parse(productosEnCarritoLS);
     actualizarContadorCarrito();
 } else {
     productosEnCarrito = []; // si no hay nada en el LS , es un array vacio
