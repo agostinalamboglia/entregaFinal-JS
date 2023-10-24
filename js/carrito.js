@@ -77,7 +77,23 @@ function eliminarDelCarrito(e){
     cargarProductosCarrito();
 
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+
+    Toastify({
+        text: "Producto eliminado!",
+        duration: 3000,
+        //destination: "https://github.com/apvarun/toastify-js",
+        //newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        background: "linear-gradient(to right, rgb(238, 189, 232), #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
 } 
+
 
 botonVaciar.addEventListener("click", vaciarCarrito);
 
@@ -85,6 +101,10 @@ function vaciarCarrito() {
     productosEnCarrito.length = 0;
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
     cargarProductosCarrito();
+
+    Swal.fire(
+        'SE BORRARON TODOS LOS PRODUCTOS',
+    )
 }
 
 function actualizarTotal(){
