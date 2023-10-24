@@ -1,10 +1,19 @@
 //array de productos
-const productosArray = [
+/* const productosArray = [
     {id:1, titulo:"pantalon", precio:12000, imagen: "./img/pantalon1.jpg"},
     {id:2, titulo:"remera", precio:6000, imagen: "./img/remera1.jpg"},
     {id:3, titulo:"buzo", precio:15000, imagen: "./img/buzo1.jpg"},
     {id:4, titulo:"zapatillas", precio:20000, imagen: "./img/zapatillas1.jpg"},
-];
+]; */
+let productosArray = [];
+
+fetch("./js/productosArray.json")
+    .then(response => response.json())
+    .then(data => {
+        productosArray = data;
+        cargarProductos(productosArray);
+    })
+
 
 //aca pongo lo que llamo del dom
 const contenedorProductos = document.querySelector("#contenedor-productos");
@@ -13,10 +22,10 @@ let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const contadorCarrito = document.querySelector("#contadorCarrito");
 
 function cargarProductos(productosElegidos){ 
-        /* contenedorProductos.innerHTML = "";  */
+        contenedorProductos.innerHTML = ""; //yo lo tenia comentado
 
         //llamo array
-        /*-   ERROR   -*/productosElegidos.forEach(producto => {
+        productosElegidos.forEach(producto => {
         const div = document.createElement("div"); //div contenedor de c/producto
         div.classList = "producto"; // pongo class al div
         div.innerHTML= `
@@ -31,8 +40,6 @@ function cargarProductos(productosElegidos){
     });
 }
 
-cargarProductos(productosArray);
-
 botonesAgregar = document.querySelectorAll(".producto-agregar");
 
 botonesAgregar.forEach(boton =>{
@@ -42,11 +49,9 @@ botonesAgregar.forEach(boton =>{
 
 let productosEnCarrito; 
 let productosEnCarritoLS = localStorage.getItem("productos-en-carrito"); //traigo lo que haya en LS
-//const productosEnCarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"));
 
 if (productosEnCarritoLS) {
-    //productosEnCarrito = productosEnCarritoLS; //si hay algo en LS , lo traigo
-    productosEnCarrito = JSON.parse(productosEnCarritoLS);
+    productosEnCarrito = JSON.parse(productosEnCarritoLS); //si hay algo en LS , lo traigo
     actualizarContadorCarrito();
 } else {
     productosEnCarrito = []; // si no hay nada en el LS , es un array vacio
